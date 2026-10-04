@@ -205,7 +205,7 @@ jobs:
 
       - name: Setup ccache
         if: env.ENABLE_CCACHE == 'true'
-        uses: hendrikmuhs/ccache-action@v2
+        uses: hendrikmuhs/ccache-action@v1
         with:
           key: build-kernel-${{ env.DEVICE }}${{ env.UPLOADNAME }}
           max-size: 2G

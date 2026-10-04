@@ -163,7 +163,13 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/kernel_workspace
           git clone ${{ env.KERNEL_SOURCE }} -b ${{ env.KERNEL_SOURCE_BRANCH }} android-kernel --depth=1
-
+          
+      - name: Copy custom defconfig from repo root into kernel source
+        run: |
+          cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+          # 把仓库根目录的自定义defconfig复制到内核arch配置目录
+          cp $GITHUB_WORKSPACE/${{env.KERNEL_CONFIG}} arch/${ARCH}/configs/${{env.KERNEL_CONFIG}}
+          
       - name: Download source boot image
         if: env.BUILD_BOOT_IMG == 'true'
         run: |
